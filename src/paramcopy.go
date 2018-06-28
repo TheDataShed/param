@@ -16,25 +16,20 @@ var service = createSSMService()
 
 var usage = fmt.Sprintf("Usage: \n    %s paramter_name", path.Base(os.Args[0]))
 
-var completionFlag = flag.Bool("completion-bash", false, "Print bash completion and exit.")
+var completionPrintFlag = flag.Bool("completion-bash", false, "Print bash completion and exit.")
+var completionClearCacheFlag = flag.Bool("clear", false, "Clear bash completion cache.")
 
 func main() {
 	flag.Parse()
+
 	printBashCompletion()
+	clearCompletionCache()
 
 	param := getName()
 
 	clipboard.WriteAll(getDecryptedParameter(param))
 	fmt.Printf("Copied %s to clipboard\n", param)
 }
-
-func printBashCompletion() {
-	if *completionFlag {
-		fmt.Println(bashCompletionFile)
-		os.Exit(0)
-	}
-}
-
 func getName() string {
 	if flag.NArg() < 1 {
 		exitErrorf("Parameter name required.\n%s", usage)
@@ -74,6 +69,23 @@ func exitErrorf(msg string, args ...interface{}) {
 	os.Exit(1)
 }
 
+// Print bash completion string and exit.
+func printBashCompletion() {
+	if *completionPrintFlag {
+		fmt.Println(bashCompletionFile)
+		os.Exit(0)
+	}
+}
+
+// Clear bash completion cache and exit.
+func clearCompletionCache() {
+	if *completionClearCacheFlag {
+		os.Setenv("PARAM_COPY_CACHE", "")
+		fmt.Println("PARAM_COPY_CACHE removed")
+		os.Exit(0)
+	}
+}
+
 var bashCompletionFile string = `#!/bin/bash
 _paramcopy_completions()
 {
@@ -82,13 +94,21 @@ _paramcopy_completions()
         return
     fi
 
-    # Cache returned parameters as an env var.
-    # export PARAM_COPY_NO_CACHE=1 to ignore the cache.
-    if [ -z "${PARAM_COPY_CACHE}" ] || [ "${PARAM_COPY_NO_CACHE}" = "1" ]; then
-        export PARAM_COPY_CACHE=$(./paramlist "${COMP_WORDS[1]}")
+    # Complete flags
+    if [[ ${COMP_WORDS[1]:0:1} == "-" ]] ; then
+        SUGGEST="-completion-bash -clear"
+    # If not a flag, get a list of possible parameters
+    else
+        # Cache returned parameters as an env var.
+        if [ -z "${PARAM_COPY_CACHE}" ]; then
+            export PARAM_COPY_CACHE=$(./paramlist)
+        fi
+        SUGGEST=${PARAM_COPY_CACHE}
     fi
-    local suggestions=$(compgen -W "${PARAM_COPY_CACHE}" "${COMP_WORDS[1]}")
-    # Use paramlist to complete the paramcopy command
+
+    # Make sure to add -- so it doesn't try to parse the last
+    # argument as a flag if it starts with a -
+    local suggestions=$(compgen -W "${SUGGEST}" -- "${COMP_WORDS[1]}")
     for param in ${suggestions}; do
         COMPREPLY+=("${param}")
     done

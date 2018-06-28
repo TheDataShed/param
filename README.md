@@ -1,15 +1,35 @@
-# paramcopy
+# WIP
+
+## TODO
+
+- Move both utilities into one binary.
+- Distribute as a release.
+
+## paramcopy
 
 Copies the specified SSM parameter to your clipboard.
 
 ## Usage
 
-paramcopy parameter
+Make sure valid AWS credentials are accessible in your terminal.
+
+    go build src/paramcopy.go
+
+    ./paramcopy parameter
 
 Copies the specified parameter to your clipboard.
+
+### Bash Completion
+
+For now, you need the paramlist binary in the same directory for bash completion.
+
+    source <(./paramcopy -completion-bash)
+    go build src/paramlist.go
 
 ## paramlist
 
 There's also a untility to list SSM parameters.
 
-You can also specify at least one prefix to filter the parameters names by.
+It was creted for use in the bash completion.
+
+You can specify at least one prefix to filter the parameter names by.
