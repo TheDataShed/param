@@ -58,6 +58,11 @@ func describeParameters(prefixes []string) []string {
 }
 
 func getParamNames(prefix string) []string {
+	// Fix passing empty string to SSM API
+	if len(prefix) < 1 {
+		return getAllParamNames()
+	}
+
 	filters := []*ssm.ParametersFilter{&ssm.ParametersFilter{
 		Key:    aws.String("Name"),
 		Values: []*string{aws.String(prefix)},
