@@ -4,6 +4,7 @@
 
 - Move both utilities into one binary.
 - Distribute as a release.
+- Write tests!
 
 ## paramcopy
 
@@ -13,7 +14,7 @@ Copies the specified SSM parameter to your clipboard.
 
 Make sure valid AWS credentials are accessible in your terminal.
 
-    go build src/paramcopy.go
+    go build pkg/paramcopy.go
 
     ./paramcopy parameter
 
@@ -24,7 +25,7 @@ Copies the specified parameter to your clipboard.
 For now, you need the paramlist binary in the same directory for bash completion.
 
     source <(./paramcopy -completion-bash)
-    go build src/paramlist.go
+    go build pkg/paramlist.go
 
 ## paramlist
 

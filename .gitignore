@@ -15,8 +15,7 @@
 *.out
 
 # Packages from go get
-pkg
-src/github.com
+github.com
 
 # Built binaries
 paramcopy
