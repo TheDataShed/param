@@ -5,7 +5,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ssm"
-	goopt "github.com/droundy/goopt"
+	"github.com/droundy/goopt"
 	"os"
 	"sort"
 )
