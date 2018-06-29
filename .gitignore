@@ -17,10 +17,6 @@
 # Packages from go get
 github.com
 
-# Built binaries
-paramcopy
-paramlist
-
 ### macOS ###
 # General
 .DS_Store

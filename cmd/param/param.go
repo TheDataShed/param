@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/atotto/clipboard"
 	"github.com/posener/complete"
+	"github.com/willjcj/param/pkg/paramcopy"
+	"github.com/willjcj/param/pkg/paramlist"
 )
 
 func main() {
@@ -18,17 +21,26 @@ func main() {
 		"param",
 		complete.Command{
 			Flags: complete.Flags{
-				"-name": complete.PredictAnything,
+				"-name":       complete.PredictAnything,
+				"-complete":   complete.PredictNothing,
+				"-uncomplete": complete.PredictNothing,
+				"-h":          complete.PredictNothing,
+				"-help":       complete.PredictNothing,
+				"-y":          complete.PredictNothing,
+			},
+			Sub: complete.Commands{
+				"copy": complete.Command{
+					// TODO fill with list output
+					Args: complete.PredictNothing,
+				},
+				"list": complete.Command{
+					// TODO fill with list output
+					Args: complete.PredictNothing,
+				},
 			},
 		},
 	)
 
-	// AddFlags adds the completion flags to the program flags,
-	// in case of using non-default flag set, it is possible to pass
-	// it as an argument.
-	// it is possible to set custom flags name
-	// so when one will type 'self -h', he will see '-complete' to install the
-	// completion and -uncomplete to uninstall it.
 	cmp.CLI.InstallName = "complete"
 	cmp.CLI.UninstallName = "uncomplete"
 	cmp.AddFlags(nil)
@@ -44,11 +56,23 @@ func main() {
 		return
 	}
 
-	// if the completion did not do anything, we can run our program logic here.
-	if name == "" {
-		fmt.Println("Your name is missing")
-		os.Exit(1)
-	}
+	// command := os.Args[0]
+	subCommand := os.Args[1]
 
-	fmt.Println("Hi,", name)
+	if subCommand == "copy" {
+		paramName := os.Args[2]
+
+		decryptedParameter := paramcopy.GetDecryptedParameter(paramName)
+
+		clipboard.WriteAll(decryptedParameter)
+		fmt.Printf("Copied %s to clipboard.\n", paramName)
+	} else if subCommand == "list" {
+		prefixes := os.Args[2:]
+
+		params := paramlist.DescribeParameters(prefixes)
+
+		for _, param := range params {
+			fmt.Println(param)
+		}
+	}
 }
