@@ -2,12 +2,12 @@ package paramlist
 
 import (
 	"fmt"
+	"os"
+	"sort"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ssm"
-	"github.com/droundy/goopt"
-	"os"
-	"sort"
 )
 
 var service = createSSMService()
@@ -23,15 +23,6 @@ func createSSMService() *ssm.SSM {
 
 	// Create SSM service client
 	return ssm.New(sess)
-}
-
-func initGoOpt() {
-	goopt.Description = func() string {
-		return "Get parameter names from AWS SSM with optional prefixes."
-	}
-	goopt.Version = version
-	goopt.Summary = "paramlist [prefixes]"
-	goopt.Parse(nil)
 }
 
 func DescribeParameters(prefixes []string) []string {
@@ -93,5 +84,3 @@ func exitErrorf(msg string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }
-
-var version string = "😂👌💯🔥🔥😂"

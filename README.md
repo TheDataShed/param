@@ -2,12 +2,14 @@
 
 ## TODO
 
-- bash completion for parameter names
-- Distribute as a release.
+- Use https://github.com/spf13/cobra to make it a nice cli app.
+- Set command.
 - Common SSM service instead of duplicated in both.
 - Write tests!
 
 ## Usage
+
+Make sure your terminal session has the correct AWS credentials.
 
 Copy a parameter to your clipboard:
 

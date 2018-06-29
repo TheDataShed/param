@@ -1,10 +1,8 @@
 package paramcopy
 
 import (
-	"flag"
 	"fmt"
 	"os"
-	"path"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -12,18 +10,6 @@ import (
 )
 
 var service = createSSMService()
-
-var usage = fmt.Sprintf("Usage: \n    %s paramter_name", path.Base(os.Args[0]))
-
-func getName() string {
-	if flag.NArg() < 1 {
-		exitErrorf("Parameter name required.\n%s", usage)
-	} else if flag.NArg() > 1 {
-		exitErrorf("Too many parameters.\n%s", usage)
-	}
-
-	return flag.Arg(0)
-}
 
 func GetDecryptedParameter(name string) string {
 	output, err := service.GetParameter(&ssm.GetParameterInput{

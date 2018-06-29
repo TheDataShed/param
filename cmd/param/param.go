@@ -12,16 +12,12 @@ import (
 )
 
 func main() {
-	// add a variable to the program
-	var name string
-	flag.StringVar(&name, "name", "", "Give your name")
 
 	// create the complete command
 	cmp := complete.New(
 		"param",
 		complete.Command{
 			Flags: complete.Flags{
-				"-name":       complete.PredictAnything,
 				"-complete":   complete.PredictNothing,
 				"-uncomplete": complete.PredictNothing,
 				"-h":          complete.PredictNothing,
@@ -41,8 +37,8 @@ func main() {
 		},
 	)
 
-	cmp.CLI.InstallName = "complete"
-	cmp.CLI.UninstallName = "uncomplete"
+	cmp.InstallName = "complete"
+	cmp.UninstallName = "uncomplete"
 	cmp.AddFlags(nil)
 
 	// parse the flags - both the program's flags and the completion flags
