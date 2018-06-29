@@ -2,12 +2,13 @@ package paramlist
 
 import (
 	"fmt"
+	"os"
+	"sort"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ssm"
 	"github.com/droundy/goopt"
-	"os"
-	"sort"
 )
 
 var service = createSSMService()
