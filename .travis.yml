@@ -1,4 +1,21 @@
 language: go
 go:
-  - "1.10"
-go_import_path: example.org/pkg/foo
+- '1.10'
+go_import_path: github.com/willjcj/param
+
+script:
+- go test -v ./...
+- ./build/build_binaries.sh
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: t6uxlo/bpCWLGJ+Scpd4i23Na9QcZ4bK+EKUI7gud3Ww0fzU3CG2pvgjgA3DBDvQTa7FWn2//0xZ066jJGzHccEzsWajEuAyjfxooIqQIuH2BwYW2p2OFQO3vmK27Jwra2Ru+oackExFGl4Z0G3YcD7/vnB5BaajcyplvtQuPr9Dk7Bu0SAgBaOEXMqNu0YHk8VxlG3qvrQwt38QVW+5Us6mYsJ8G0AbQvPN6zoiBcBo3Uj6KfYzCi08/4C0FfXV3y5RkwDQfFdbz5hhldTZqPDs9rJko6eF6uhp2uR1tnOIWo4Hkg5Mlhdm5RMzwOpClmOc6LVvHQxhywfvWI8S//AlsBLAvUXm4rOQm5IPBSlSxLx4v/gTnfJ/KBTGbXWF4rPG/EcZDd57g+fzaPlJFVaYqdR4C45K5Zm9C2H7Q8qli5X65LvFTABx7SUo6pHeV/XH4SlKeWUSNLhzMJHBG8rHO4/YxWEENP9JktX6tqf9Dth+2U3/q3mmkuRjU3H8Whx8UYJQaDAopo/WHnNlvuWo2Lpwl5UEa7Gh5qPFVOFWN1LTbCdt6ToQCrqsw02gikA3yqq4HYzW8IYta4m3YaOiuqv5GHgUXdpOteSfjM8KUPR4e2d0dsMDXwQuJowkpGPOUG5QZ86EFJOli19PpmZxwdRvxTlT4jOfA8FR5Hc=
+  file:
+  - bin/param-darwin-amd64
+  - bin/param-linux-amd64
+  - README.md
+  on:
+    tags: true
+    repo: WillJCJ/param
