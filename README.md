@@ -2,9 +2,8 @@
 
 ## TODO
 
-- Use https://github.com/spf13/cobra to make it a nice cli app.
-- Set command.
-- Common SSM service instead of duplicated in both.
+- Set command - Command to set parameters
+- Common SSM service instead of duplicated in all commands.
 - Write tests!
 - Write about how to set up AWS variables/profile.
 - Add global type flag String/SecureString
@@ -29,3 +28,8 @@ Get a sorted list of parameters in SSM with optional prefix(es):
     prefix1.dev.password
     prefix1.prod.password
     prefix2.key
+
+
+## Docs
+
+Docs for each command can be found at `/docs`
