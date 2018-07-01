@@ -1,5 +1,7 @@
 # WIP
 
+[![Build Status](https://travis-ci.com/WillJCJ/param.svg?branch=master)](https://travis-ci.com/WillJCJ/param)
+
 ## TODO
 
 - Set command - Command to set parameters
