@@ -5,6 +5,8 @@ go_import_path: github.com/willjcj/param
 
 script:
 - go test -v ./...
+
+before_deploy:
 - ./build/build_binaries.sh
 
 deploy:
@@ -15,7 +17,6 @@ deploy:
   file:
   - bin/param-darwin-amd64
   - bin/param-linux-amd64
-  - README.md
   on:
     tags: true
     repo: WillJCJ/param
