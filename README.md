@@ -6,6 +6,8 @@
 - Set command.
 - Common SSM service instead of duplicated in both.
 - Write tests!
+- Write about how to set up AWS variables/profile.
+- Add global type flag String/SecureString
 
 ## Usage
 
@@ -23,7 +25,7 @@ Get a sorted list of parameters in SSM with optional prefix(es):
     parameter_name2
     ...
 
-    $ param list prefix1 prefix2 ...
+    $ param list -p prefix1,prefix2 ...
     prefix1.dev.password
     prefix1.prod.password
     prefix2.key

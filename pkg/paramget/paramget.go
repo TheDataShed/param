@@ -1,4 +1,4 @@
-package paramcopy
+package paramget
 
 import (
 	"fmt"
