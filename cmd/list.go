@@ -21,7 +21,7 @@ var listCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(listCmd)
+	RootCmd.AddCommand(listCmd)
 
 	listCmd.Flags().StringVarP(&prefixes, "prefix", "p", "", "Prefixes to fileter by")
 }

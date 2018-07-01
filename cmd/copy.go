@@ -21,7 +21,7 @@ var copyCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(copyCmd)
+	RootCmd.AddCommand(copyCmd)
 	copyCmd.Flags().BoolVarP(&verbose, "verbose", "v", false, "Also print parameter value to the stdout.")
 }
 

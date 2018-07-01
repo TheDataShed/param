@@ -11,16 +11,16 @@ import (
 
 var cfgFile string
 
-var rootCmd = &cobra.Command{
+var RootCmd = &cobra.Command{
 	Use:   "param",
 	Short: "Tools to improve Parameter Store on the command line.",
 	Long:  "Param is a cli tool to improve interacting with AWS Parameter Store.",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
+// This is called by main.main(). It only needs to happen once to the RootCmd.
 func Execute() {
-	if err := rootCmd.Execute(); err != nil {
+	if err := RootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
@@ -32,7 +32,7 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.param.yaml)")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.param.yaml)")
 }
 
 // initConfig reads in config file and ENV variables if set.
