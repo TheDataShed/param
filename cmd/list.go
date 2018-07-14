@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/willjcj/param/pkg/paramlist"
+	"github.com/willjcj/param/pkg/param"
 )
 
 var prefixes string
@@ -28,7 +28,7 @@ func init() {
 
 func listParameters() {
 	prefixSlice := strings.Split(prefixes, ",")
-	for _, param := range paramlist.DescribeParameters(prefixSlice) {
+	for _, param := range param.DescribeParameters(prefixSlice) {
 		fmt.Println(param)
 	}
 }

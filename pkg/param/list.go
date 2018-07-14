@@ -1,29 +1,11 @@
-package paramlist
+package param
 
 import (
-	"fmt"
-	"os"
 	"sort"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ssm"
 )
-
-var service = createSSMService()
-
-func createSSMService() *ssm.SSM {
-	sess, err := session.NewSession(&aws.Config{
-		Region: aws.String("eu-west-1")},
-	)
-
-	if err != nil {
-		exitErrorf("Unable to describe parameters, %v", err)
-	}
-
-	// Create SSM service client
-	return ssm.New(sess)
-}
 
 func DescribeParameters(prefixes []string) []string {
 	paramNames := []string{}
@@ -69,18 +51,4 @@ func getParamNames(prefix string) []string {
 
 func getAllParamNames() []string {
 	return getParamNames(" ")
-}
-
-func appendIfMissing(slice []string, s string) []string {
-	for _, ele := range slice {
-		if ele == s {
-			return slice
-		}
-	}
-	return append(slice, s)
-}
-
-func exitErrorf(msg string, args ...interface{}) {
-	fmt.Fprintf(os.Stderr, msg+"\n", args...)
-	os.Exit(1)
 }

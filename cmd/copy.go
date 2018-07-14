@@ -1,11 +1,8 @@
 package cmd
 
 import (
-	"fmt"
-
-	"github.com/atotto/clipboard"
 	"github.com/spf13/cobra"
-	"github.com/willjcj/param/pkg/paramget"
+	"github.com/willjcj/param/pkg/param"
 )
 
 var verbose bool
@@ -16,21 +13,11 @@ var copyCmd = &cobra.Command{
 	Long:  "Copy the specified SSM Parameter from Paramter Store to your clipboard.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		copyToClipboard(args[0])
+		param.Copy(args[0], verbose)
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(copyCmd)
 	copyCmd.Flags().BoolVarP(&verbose, "verbose", "v", false, "Also print parameter value to the stdout.")
-}
-
-func copyToClipboard(name string) {
-	value := paramget.GetDecryptedParameter(name)
-
-	clipboard.WriteAll(value)
-
-	if verbose {
-		fmt.Println(value)
-	}
 }

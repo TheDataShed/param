@@ -11,17 +11,20 @@
 
 ## Introduction
 
-A cli tool for talking to AWS Parameter Store. Copy parameters directly to your clipboard.
+`param` is a cli tool for talking to AWS Parameter Store. Copy parameters
+directly to your clipboard.
 
-`param` uses [Cobra](https://github.com/spf13/cobra), a library providing a simple
-interface to create powerful CLI interfaces similar to git & go tools.
+`param` uses [Cobra](https://github.com/spf13/cobra), a library providing a
+simple interface to create powerful CLI interfaces similar to git & go tools.
 
-`param` works with Linux and MacOS. It also supports `bash` and `zsh` completion.
+`param` works with Linux and MacOS.
+It also supports `bash` and `zsh` completion.
 
 ## Install
 
-You can install `param` by downloading the latest binary from the [Releases](https://github.com/WillJCJ/param/releases)
-page or by compiling from source with `go`.
+You can install `param` by downloading the latest binary from the
+[Releases](https://github.com/WillJCJ/param/releases) page or by compiling
+from source with `go`.
 
 ```console
 go get github.com/willjcj/param
@@ -34,12 +37,13 @@ already on your `PATH`.
 
 ### Curl
 
-Run the below command to download the 1.3.0 binary and add it to `/usr/local/bin`.
+Run the below command to download the 1.4.0 binary and add it to
+`/usr/local/bin`.
 
 #### Linux
 
 ```console
-curl -LO https://github.com/WillJCJ/param/releases/download/1.3.0/param-linux-amd64 && \
+curl -LO https://github.com/WillJCJ/param/releases/download/1.4.0/param-linux-amd64 && \
 chmod +x param-linux-amd64 && \
 sudo mv param-linux-amd64 /usr/local/bin/param
 ```
@@ -47,7 +51,7 @@ sudo mv param-linux-amd64 /usr/local/bin/param
 #### MacOS
 
 ```console
-curl -LO https://github.com/WillJCJ/param/releases/download/1.3.0/param-darwin-amd64 && \
+curl -LO https://github.com/WillJCJ/param/releases/download/1.4.0/param-darwin-amd64 && \
 chmod +x param-darwin-amd64 && \
 sudo mv param-darwin-amd64 /usr/local/bin/param
 ```
@@ -71,6 +75,11 @@ $ param copy parameter_name -v
 password123
 ```
 
+#### Auto-completion
+
+With shell completion enabled, you can press tab to auto-complete the parameter
+names.
+
 ### List
 
 Get a sorted list of parameters in SSM with optional prefix(es):
@@ -89,9 +98,25 @@ prefix1.prod.password
 prefix2.key
 ```
 
+### Show
+
+If you'd like to print out the decrypted parameter without copying it the
+clipboard, you can use:
+
+```console
+$ param show parameter_name
+password123
+```
+
+#### Auto-completion
+
+With shell completion enabled, you can press tab to auto-complete the parameter
+names.
+
 ## Shell Completion
 
-`param completion (bash|zsh)` outputs shell completion code for the specified shell (`bash` or `zsh`).
+`param completion (bash|zsh)` outputs shell completion code for the specified
+shell (`bash` or `zsh`).
 The shell code must be evaluated to provide interactive completion of
 param commands.
 This can be done by sourcing it from `~/.bashrc` or `~/.zshrc`
@@ -149,16 +174,16 @@ a new tag is pushed to GitHub.
 - New Commands
 	- Set command - Command to set parameters
 	- Delete command - Command to delete parameters
-	- Show command - Like `copy -v` without copying to clipboard
 - Improvements
-	- Add a flag to specify parameter type. Currently only works with `SecureString`s.
+	- Add a flag to specify parameter type.
+	Currently only works with `SecureString`s.
 - Shell Completion
 	- `zsh` completion doesn't seem to work.
-	- Update or delete the bash completion cache after creating/deleting parameters
+	- Update or delete the bash completion cache after creating/deleting
+	parameters
 	- Add bash completion for other subcommands and flags.
 - Write Tests
 - Improve Documentation
 	- More Examples
 	- Write about how to set up AWS variables/profile.
-- Refactor
-	- Common SSM service instead of duplicated in all commands.
+	(And what capabilities are required)
