@@ -1,19 +1,20 @@
-## param show
+## param set
 
-Show a decrypted parameter in the console.
+Set a paramter in Parameter Store.
 
 ### Synopsis
 
-Show the specified decrypted SSM Parameter from Paramter Store in your console.
+Add a SecureString paramter to Parameter Store.
 
 ```
-param show parameter_name [flags]
+param set name value [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for show
+  -f, --force   Overwrite the parameter if it exists.
+  -h, --help    help for set
 ```
 
 ### Options inherited from parent commands

@@ -1,13 +1,20 @@
 package param
 
 import (
+	"fmt"
 	"sort"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
-func DescribeParameters(prefixes []string) []string {
+func List(prefixes []string) {
+	for _, param := range describeParameters(prefixes) {
+		fmt.Println(param)
+	}
+}
+
+func describeParameters(prefixes []string) []string {
 	paramNames := []string{}
 	if len(prefixes) <= 0 {
 		paramNames = getAllParamNames()
@@ -32,6 +39,7 @@ func getParamNames(prefix string) []string {
 		Key:    aws.String("Name"),
 		Values: []*string{aws.String(prefix)},
 	}}
+
 	paramNames := []string{}
 	err := service.DescribeParametersPages(&ssm.DescribeParametersInput{
 		Filters: filters},

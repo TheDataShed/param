@@ -8,7 +8,7 @@ import (
 var verbose bool
 
 var copyCmd = &cobra.Command{
-	Use:   "copy parameter_name",
+	Use:   "copy name",
 	Short: "Copy a parameter to clipboard.",
 	Long:  "Copy the specified SSM Parameter from Paramter Store to your clipboard.",
 	Args:  cobra.ExactArgs(1),
