@@ -15,6 +15,7 @@ var RootCmd = &cobra.Command{
 	Use:   "param",
 	Short: "Tools to improve Parameter Store on the command line.",
 	Long:  "Param is a cli tool to improve interacting with AWS Parameter Store.",
+	BashCompletionFunction: bash_completion_func,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -60,3 +61,53 @@ func initConfig() {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
 }
+
+const (
+	bash_completion_func = `__param_list()
+{
+    local words_no_flags=()
+    for word in ${COMP_WORDS[@]}; do
+        if [[ "${word}" != -* ]]; then
+            words_no_flags+=("${word}")
+        fi
+    done
+
+    # Check the word to complete is the 3rd one, not including flags
+    if [ "${#words_no_flags[@]}" -gt "3" ]; then
+        return
+    fi
+
+    # Cache parameter names as an env var.
+    #
+    # Ignore cache:
+    # export PARAM_NO_CACHE=1
+    #
+    # Clear cache:
+    # unset PARAM_CACHE
+    local param_names=(${PARAM_CACHE[@]})
+    if [ -z "${param_names[*]}" ] || [ "${PARAM_NO_CACHE}" = "1" ]; then
+        param_names=($(param list 2>/dev/null | awk '{print $1}'))
+    fi
+
+    # If PARAM_NO_CACHE isn't set, then export the param_names as PARAM_CACHE
+    if [ "${PARAM_NO_CACHE}" != "1" ]; then
+        export PARAM_CACHE=(${param_names[@]})
+    else
+        unset PARAM_CACHE
+    fi
+
+    COMPREPLY=( $( compgen -W "${param_names[*]}" -- "${cur}" ) )
+}
+
+__custom_func() {
+    case ${last_command} in
+        param_copy)
+            __param_list
+            return
+            ;;
+        *)
+            ;;
+    esac
+}
+`
+)

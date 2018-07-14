@@ -20,7 +20,7 @@ Examples:
     source <(param completion bash)
     " >> $HOME/.bashrc
     source $HOME/.bashrc`,
-	Args:      cobra.OnlyValidArgs,
+	Args:      cobra.ExactArgs(1),
 	ValidArgs: []string{"bash", "zsh"},
 	Run: func(cmd *cobra.Command, args []string) {
 		if args[0] == "bash" {
