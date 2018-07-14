@@ -1,24 +1,23 @@
+#!/bin/bash
 
 PLATFORMS="darwin/amd64 linux/amd64"
 
-type setopt >/dev/null 2>&1
-
-SCRIPT_NAME=`basename "$0"`
+SCRIPT_NAME=$(basename "${0}")
 FAILURES=""
 
 if [ -z "${GOPATH}" ]; then
-    GOPATH="~/go"
+    GOPATH="${HOME}/go"
 fi
 BIN_PATH="${GOPATH}/src/github.com/willjcj/param/bin"
 
-for PLATFORM in $PLATFORMS; do
+for PLATFORM in ${PLATFORMS}; do
   GOOS=${PLATFORM%/*}
   GOARCH=${PLATFORM#*/}
   BIN_FILENAME="${BIN_PATH}/param-${GOOS}-${GOARCH}"
 
-  CMD="GOOS=${GOOS} GOARCH=${GOARCH} go build -o ${BIN_FILENAME} $@"
+  CMD="GOOS=${GOOS} GOARCH=${GOARCH} go build -o ${BIN_FILENAME} ${@}"
   echo "${CMD}"
-  eval $CMD || FAILURES="${FAILURES} ${PLATFORM}"
+  eval "${CMD}" || FAILURES="${FAILURES} ${PLATFORM}"
 done
 
 # eval errors
