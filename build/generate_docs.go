@@ -9,7 +9,7 @@ import (
 	"path"
 
 	"github.com/spf13/cobra/doc"
-	"github.com/willjcj/param/cmd"
+	"github.com/thedatashed/param/cmd"
 )
 
 func main() {
@@ -18,7 +18,7 @@ func main() {
 		gopath = build.Default.GOPATH
 	}
 
-	docsPath := path.Join(gopath, "src", "github.com", "willjcj", "param", "docs")
+	docsPath := path.Join(gopath, "src", "github.com", "thedatashed", "param", "docs")
 
 	err := doc.GenMarkdownTree(cmd.RootCmd, docsPath)
 	if err != nil {

@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/willjcj/param/pkg/param"
+	"github.com/thedatashed/param/pkg/param"
 )
 
 var verbose bool

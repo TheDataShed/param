@@ -8,7 +8,7 @@ FAILURES=""
 if [ -z "${GOPATH}" ]; then
     GOPATH="${HOME}/go"
 fi
-BIN_PATH="${GOPATH}/src/github.com/willjcj/param/bin"
+BIN_PATH="${GOPATH}/src/github.com/thedatashed/param/bin"
 
 for PLATFORM in ${PLATFORMS}; do
   GOOS=${PLATFORM%/*}

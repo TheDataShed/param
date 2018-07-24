@@ -14,12 +14,6 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Packages from go get
-github.com
-
-# Complied binaries
-bin/
-
 ### macOS ###
 # General
 .DS_Store

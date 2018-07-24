@@ -1,7 +1,7 @@
 language: go
 go:
 - '1.10'
-go_import_path: github.com/willjcj/param
+go_import_path: github.com/thedatashed/param
 
 script:
 - go test -v ./...
@@ -13,10 +13,10 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: t6uxlo/bpCWLGJ+Scpd4i23Na9QcZ4bK+EKUI7gud3Ww0fzU3CG2pvgjgA3DBDvQTa7FWn2//0xZ066jJGzHccEzsWajEuAyjfxooIqQIuH2BwYW2p2OFQO3vmK27Jwra2Ru+oackExFGl4Z0G3YcD7/vnB5BaajcyplvtQuPr9Dk7Bu0SAgBaOEXMqNu0YHk8VxlG3qvrQwt38QVW+5Us6mYsJ8G0AbQvPN6zoiBcBo3Uj6KfYzCi08/4C0FfXV3y5RkwDQfFdbz5hhldTZqPDs9rJko6eF6uhp2uR1tnOIWo4Hkg5Mlhdm5RMzwOpClmOc6LVvHQxhywfvWI8S//AlsBLAvUXm4rOQm5IPBSlSxLx4v/gTnfJ/KBTGbXWF4rPG/EcZDd57g+fzaPlJFVaYqdR4C45K5Zm9C2H7Q8qli5X65LvFTABx7SUo6pHeV/XH4SlKeWUSNLhzMJHBG8rHO4/YxWEENP9JktX6tqf9Dth+2U3/q3mmkuRjU3H8Whx8UYJQaDAopo/WHnNlvuWo2Lpwl5UEa7Gh5qPFVOFWN1LTbCdt6ToQCrqsw02gikA3yqq4HYzW8IYta4m3YaOiuqv5GHgUXdpOteSfjM8KUPR4e2d0dsMDXwQuJowkpGPOUG5QZ86EFJOli19PpmZxwdRvxTlT4jOfA8FR5Hc=
+    secure: fe09o/awnojNgLd52dwjM/zOSkn/XlKF8QFumuXdr9s/6j3S14HQvWJ4wtoMIUjNokooI31TJbyG68hAEYtbwcWinbzRmODlBbTFS2rRJgiQPtymPEKUDyLwT++Dbaa5Lp9FaNPq5mYGVasS+BQX9kxJ90OxsChRobQ7QV8IuAt0k0H6KI1jsgiTWrt4t5zZhNbjHjFHnQ9grbqCOJBSp+niwCp62JFFHcmhgPQNLDu3KkXfkwuWyzmLqHrNOw1YNapthxEXWI8T1mMhiAi5jT42cKVjN/G6bcfjLNrB/zNlOBFdrOWnEu1ou6WRpj/2v/Ni8FnsWnBaINRGnR3cL3cYpjPH+/FcsHOra/xdrIadoxb3SH6Bx7CguAqW+hZ2Bw7SkqqfFkOXp+tMtcbGI00jT+iOZ0zNexvPE0GtCftMJFtbrfU2bKE9ysoOO0UoQ6uh+XV/iqOdcm4ltUQhh2zlWCfRv4DsxoRhm/9LZ4GkH3fNmwOcd2P0QN6yLvLtPc6WgPnD5wFhsiwgvmcUfzK5jvp+9Oc6bs1J/PWrmDXi7YgNtustY3+7bqqLO4tjHBLpRwPsZxpZY7YRJRUw2UHT+x9KWzGxYtq2FgZBQaU+aoNGvyZF2vSLQ/aLFgPIffqTVQ1KyGLyLvEYjLjh2pYr3f5i2LniTcexyTieRiA=
   file:
   - bin/param-darwin-amd64
   - bin/param-linux-amd64
   on:
     tags: true
-    repo: WillJCJ/param
+    repo: TheDataShed/param

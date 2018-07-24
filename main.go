@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/willjcj/param/cmd"
+	"github.com/thedatashed/param/cmd"
 )
 
 func main() {
