@@ -9,7 +9,7 @@ var force bool
 
 var setCmd = &cobra.Command{
 	Use:   "set name value",
-	Short: "Set a paramter in Parameter Store.",
+	Short: "Set a paramter.",
 	Long:  "Add a SecureString paramter to Parameter Store.",
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -20,5 +20,4 @@ var setCmd = &cobra.Command{
 func init() {
 	RootCmd.AddCommand(setCmd)
 	setCmd.Flags().BoolVarP(&force, "force", "f", false, "Overwrite the parameter if it exists.")
-
 }

@@ -101,7 +101,7 @@ const (
 
 __custom_func() {
     case ${last_command} in
-        param_copy | param_set | param_show)
+        param_copy | param_delete | param_set | param_show)
             __param_list
             return
             ;;
