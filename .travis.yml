@@ -7,15 +7,16 @@ go_import_path: github.com/thedatashed/param
 
 jobs:
   include:
-  - stage: Unit Tests
+  - stage: Tests
+    name: "Unit Tests"
     script: go test -v ./...
-  - stage: Integration Tests
-    services:
-    - docker
-    script:
+  - script:
     - ./build/build_binaries.sh
     - sudo ln -s bin/param-linux-amd64 /usr/local/bin/param
     - test/integration.sh
+    name: "Integration Tests"
+    services:
+    - docker
   - stage: GitHub Release
     script: echo "Deploying to GitHub releases ..."
     before_deploy:
