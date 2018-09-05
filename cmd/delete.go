@@ -11,7 +11,7 @@ var deleteCmd = &cobra.Command{
 	Long:  "Delete the given paramter from Parameter Store.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		param.Delete(args[0])
+		param.Delete(*createSSMService(), args[0])
 	},
 }
 

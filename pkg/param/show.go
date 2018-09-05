@@ -2,10 +2,12 @@ package param
 
 import (
 	"fmt"
+
+	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
-func Show(name string) {
-	value := getDecryptedParameter(name)
+func Show(service ssm.SSM, name string) {
+	value := getDecryptedParameter(service, name)
 
 	fmt.Println(value)
 }

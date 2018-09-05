@@ -5,7 +5,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
-func getDecryptedParameter(name string) string {
+func getDecryptedParameter(service ssm.SSM, name string) string {
 	output, err := service.GetParameter(&ssm.GetParameterInput{
 		Name:           aws.String(name),
 		WithDecryption: aws.Bool(true),

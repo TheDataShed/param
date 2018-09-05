@@ -1,22 +1,35 @@
+sudo: required
+
 language: go
 go:
 - '1.10'
 go_import_path: github.com/thedatashed/param
 
-script:
-- go test -v ./...
+services:
+  - docker
 
-before_deploy:
-- ./build/build_binaries.sh
+before_install:
+  - docker pull localstack/localstack
+  - docker run -d -p 4583:4583 -e SERVICES=ssm localstack/localstack
 
-deploy:
-  provider: releases
-  skip_cleanup: true
-  api_key:
-    secure: fe09o/awnojNgLd52dwjM/zOSkn/XlKF8QFumuXdr9s/6j3S14HQvWJ4wtoMIUjNokooI31TJbyG68hAEYtbwcWinbzRmODlBbTFS2rRJgiQPtymPEKUDyLwT++Dbaa5Lp9FaNPq5mYGVasS+BQX9kxJ90OxsChRobQ7QV8IuAt0k0H6KI1jsgiTWrt4t5zZhNbjHjFHnQ9grbqCOJBSp+niwCp62JFFHcmhgPQNLDu3KkXfkwuWyzmLqHrNOw1YNapthxEXWI8T1mMhiAi5jT42cKVjN/G6bcfjLNrB/zNlOBFdrOWnEu1ou6WRpj/2v/Ni8FnsWnBaINRGnR3cL3cYpjPH+/FcsHOra/xdrIadoxb3SH6Bx7CguAqW+hZ2Bw7SkqqfFkOXp+tMtcbGI00jT+iOZ0zNexvPE0GtCftMJFtbrfU2bKE9ysoOO0UoQ6uh+XV/iqOdcm4ltUQhh2zlWCfRv4DsxoRhm/9LZ4GkH3fNmwOcd2P0QN6yLvLtPc6WgPnD5wFhsiwgvmcUfzK5jvp+9Oc6bs1J/PWrmDXi7YgNtustY3+7bqqLO4tjHBLpRwPsZxpZY7YRJRUw2UHT+x9KWzGxYtq2FgZBQaU+aoNGvyZF2vSLQ/aLFgPIffqTVQ1KyGLyLvEYjLjh2pYr3f5i2LniTcexyTieRiA=
-  file:
-  - bin/param-darwin-amd64
-  - bin/param-linux-amd64
-  on:
-    tags: true
-    repo: TheDataShed/param
+jobs:
+  include:
+    - stage: Unit Tests
+      script: go test -v ./...
+    - stage: Integration Tests
+      script: curl localhost:5483
+    - stage: GitHub Release
+      script: echo "Deploying to GitHub releases ..."
+      before_deploy:
+      - ./build/build_binaries.sh
+      deploy:
+        provider: releases
+        skip_cleanup: true
+        api_key:
+          secure: fe09o/awnojNgLd52dwjM/zOSkn/XlKF8QFumuXdr9s/6j3S14HQvWJ4wtoMIUjNokooI31TJbyG68hAEYtbwcWinbzRmODlBbTFS2rRJgiQPtymPEKUDyLwT++Dbaa5Lp9FaNPq5mYGVasS+BQX9kxJ90OxsChRobQ7QV8IuAt0k0H6KI1jsgiTWrt4t5zZhNbjHjFHnQ9grbqCOJBSp+niwCp62JFFHcmhgPQNLDu3KkXfkwuWyzmLqHrNOw1YNapthxEXWI8T1mMhiAi5jT42cKVjN/G6bcfjLNrB/zNlOBFdrOWnEu1ou6WRpj/2v/Ni8FnsWnBaINRGnR3cL3cYpjPH+/FcsHOra/xdrIadoxb3SH6Bx7CguAqW+hZ2Bw7SkqqfFkOXp+tMtcbGI00jT+iOZ0zNexvPE0GtCftMJFtbrfU2bKE9ysoOO0UoQ6uh+XV/iqOdcm4ltUQhh2zlWCfRv4DsxoRhm/9LZ4GkH3fNmwOcd2P0QN6yLvLtPc6WgPnD5wFhsiwgvmcUfzK5jvp+9Oc6bs1J/PWrmDXi7YgNtustY3+7bqqLO4tjHBLpRwPsZxpZY7YRJRUw2UHT+x9KWzGxYtq2FgZBQaU+aoNGvyZF2vSLQ/aLFgPIffqTVQ1KyGLyLvEYjLjh2pYr3f5i2LniTcexyTieRiA=
+        file:
+        - bin/param-darwin-amd64
+        - bin/param-linux-amd64
+        on:
+          tags: true
+          repo: TheDataShed/param

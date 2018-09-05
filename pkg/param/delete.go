@@ -5,11 +5,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
-func Delete(name string) {
-	deleteParameter(name)
+func Delete(service ssm.SSM, name string) {
+	deleteParameter(service, name)
 }
 
-func deleteParameter(name string) {
+func deleteParameter(service ssm.SSM, name string) {
 	_, err := service.DeleteParameter(&ssm.DeleteParameterInput{
 		Name: aws.String(name),
 	})

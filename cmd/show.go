@@ -11,7 +11,7 @@ var showCmd = &cobra.Command{
 	Long:  "Show the specified decrypted SSM Parameter from Paramter Store in your console.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		param.Show(args[0])
+		param.Show(*createSSMService(), args[0])
 	},
 }
 

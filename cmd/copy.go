@@ -13,7 +13,7 @@ var copyCmd = &cobra.Command{
 	Long:  "Copy the specified SSM Parameter from Paramter Store to your clipboard.",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		param.Copy(args[0], verbose)
+		param.Copy(*createSSMService(), args[0], verbose)
 	},
 }
 

@@ -16,12 +16,12 @@ var listCmd = &cobra.Command{
     Results are sorted in alphabetical order.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		prefixSlice := strings.Split(prefixes, ",")
-		param.List(prefixSlice)
+		param.List(*createSSMService(), prefixSlice)
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(listCmd)
 
-	listCmd.Flags().StringVarP(&prefixes, "prefix", "p", "", "Prefixes to fileter by")
+	listCmd.Flags().StringVarP(&prefixes, "prefix", "p", "", "Prefixes to filter by")
 }

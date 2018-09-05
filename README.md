@@ -205,6 +205,8 @@ when a new tag is pushed to GitHub.
 	- Copy timeout.
 		- Configurable timeout for copying a parameter so it doesn't stay in
 		the clipboard indefinitely.
+- Fix
+	- Region is hard-coded as `eu-west-1`
 - Shell Completion
 	- `zsh` completion doesn't seem to work.
 	- Update or delete the bash completion cache after creating/deleting
@@ -216,3 +218,5 @@ when a new tag is pushed to GitHub.
 	- More Examples
 	- Write about how to set up AWS variables/profile.
 	(And what capabilities are required)
+- Localstack
+	- `param list` doesn't work without a `-p` argument.

@@ -8,19 +8,19 @@ import (
 	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
-func List(prefixes []string) {
-	for _, param := range describeParameters(prefixes) {
+func List(service ssm.SSM, prefixes []string) {
+	for _, param := range describeParameters(service, prefixes) {
 		fmt.Println(param)
 	}
 }
 
-func describeParameters(prefixes []string) []string {
+func describeParameters(service ssm.SSM, prefixes []string) []string {
 	paramNames := []string{}
 	if len(prefixes) <= 0 {
-		paramNames = getAllParamNames()
+		paramNames = getAllParamNames(service)
 	} else {
 		for _, prefix := range prefixes {
-			for _, name := range getParamNames(prefix) {
+			for _, name := range getParamNames(service, prefix) {
 				paramNames = appendIfMissing(paramNames, name)
 			}
 		}
@@ -29,10 +29,10 @@ func describeParameters(prefixes []string) []string {
 	return paramNames
 }
 
-func getParamNames(prefix string) []string {
+func getParamNames(service ssm.SSM, prefix string) []string {
 	// Fix passing empty string to SSM API
 	if len(prefix) < 1 {
-		return getAllParamNames()
+		return getAllParamNames(service)
 	}
 
 	filters := []*ssm.ParametersFilter{&ssm.ParametersFilter{
@@ -57,6 +57,6 @@ func getParamNames(prefix string) []string {
 	return paramNames
 }
 
-func getAllParamNames() []string {
-	return getParamNames(" ")
+func getAllParamNames(service ssm.SSM) []string {
+	return getParamNames(service, " ")
 }

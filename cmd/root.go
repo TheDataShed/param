@@ -10,6 +10,7 @@ import (
 )
 
 var cfgFile string
+var endpointURL string
 
 var RootCmd = &cobra.Command{
 	Use:   "param",
@@ -34,6 +35,9 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.param.yaml)")
+
+	RootCmd.PersistentFlags().StringVar(&endpointURL, "endpoint-url", "", "Prefixes to filter by")
+	viper.BindPFlag("endpoint-url", RootCmd.PersistentFlags().Lookup("endpoint-url"))
 }
 
 // initConfig reads in config file and ENV variables if set.

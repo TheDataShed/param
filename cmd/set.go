@@ -13,7 +13,7 @@ var setCmd = &cobra.Command{
 	Long:  "Add a SecureString paramter to Parameter Store.",
 	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		param.Set(args[0], args[1], force)
+		param.Set(*createSSMService(), args[0], args[1], force)
 	},
 }
 
