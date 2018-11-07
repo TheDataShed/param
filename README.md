@@ -37,13 +37,13 @@ already on your `PATH`.
 
 ### Curl
 
-Run the below command to download the 1.7.1 binary and add it to
+Run the below command to download the 1.7.2 binary and add it to
 `/usr/local/bin`.
 
 #### Linux
 
 ```console
-curl -LO https://github.com/TheDataShed/param/releases/download/1.7.1/param-linux-amd64 && \
+curl -LO https://github.com/TheDataShed/param/releases/download/1.7.2/param-linux-amd64 && \
 chmod +x param-linux-amd64 && \
 sudo mv param-linux-amd64 /usr/local/bin/param
 ```
@@ -51,7 +51,7 @@ sudo mv param-linux-amd64 /usr/local/bin/param
 #### MacOS
 
 ```console
-curl -LO https://github.com/TheDataShed/param/releases/download/1.7.1/param-darwin-amd64 && \
+curl -LO https://github.com/TheDataShed/param/releases/download/1.7.2/param-darwin-amd64 && \
 chmod +x param-darwin-amd64 && \
 sudo mv param-darwin-amd64 /usr/local/bin/param
 ```

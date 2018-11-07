@@ -4,6 +4,7 @@ set -e
 
 # Contact local parameter store with fake credentials
 function prm() {
+	AWS_REGION=us-east-1 \
 	AWS_SESSION_TOKEN=fake \
 	AWS_ACCESS_KEY_ID=fake \
 	AWS_SECRET_ACCESS_KEY=fake \
@@ -13,7 +14,7 @@ function prm() {
 docker pull localstack/localstack
 docker run -d -p 4583:4583 -e SERVICES=ssm --name localstack localstack/localstack
 # Allow localstack to stand up
-sleep 5
+sleep 7
 
 echo "Setting parameter 'test' to 'teststring'..."
 prm set test teststring
