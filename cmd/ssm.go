@@ -10,13 +10,16 @@ import (
 func createSSMService() *ssm.SSM {
 	endpoint := viper.GetString("endpoint-url")
 
-	config := aws.NewConfig().WithRegion("eu-west-1")
-
-	if endpoint != "" {
-		config = config.WithEndpoint(endpoint)
+	options := session.Options{
+		SharedConfigState: session.SharedConfigEnable,
 	}
 
-	sess := session.Must(session.NewSession(config))
+	if endpoint != "" {
+		options.Config.MergeIn(aws.NewConfig().WithEndpoint(endpoint))
+	}
+
+	// Get config from ~/.aws/config file
+	sess := session.Must(session.NewSessionWithOptions(options))
 
 	// Create SSM service client
 	return ssm.New(sess)
